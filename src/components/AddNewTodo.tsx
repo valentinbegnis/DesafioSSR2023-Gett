@@ -1,5 +1,4 @@
 import useTodosActions from '@/hooks/useTodosActions';
-import { Button, TextInput } from '@tremor/react';
 
 export default function AddNewTodo() {
   const { addTodo } = useTodosActions();
@@ -13,24 +12,22 @@ export default function AddNewTodo() {
     const title = formData.get('title') as string;
 
     addTodo({ userId: 1, title, completed: false });
-    form.reset();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-4">
-      <label className="font-bold text-gray-500">
-        Add a new todo
-        <TextInput
-          autoFocus
-          type="text"
+    <section className="p-4 border rounded-md shadow-md bg-white">
+      <h2 className="mb-2 text-xl font-bold">Add new todo</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <input
           name="title"
-          placeholder="Study for Math exam..."
-          className="h-10 mt-1"
+          type="text"
+          placeholder="eg: Finish homework..."
+          className="border rounded-md p-2"
         />
-      </label>
-      <Button type="submit" color="amber" className="h-10 self-end">
-        Add
-      </Button>
-    </form>
+        <button type="submit" className="rounded-md p-2 font-bold text-white bg-purple-300">
+          Add
+        </button>
+      </form>
+    </section>
   );
 }
