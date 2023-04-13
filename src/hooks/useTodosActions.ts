@@ -1,4 +1,9 @@
-import { addNewTodo, deleteTodoById } from '@/store/todos/slice';
+import {
+  addNewTodo,
+  deleteTodoById,
+  toggleTodoCompleted,
+  updateTodoTitle,
+} from '@/store/todos/slice';
 import { useAppDispatch } from './store';
 
 export default function useTodosActions() {
@@ -12,5 +17,18 @@ export default function useTodosActions() {
     dispatch(deleteTodoById(id));
   };
 
-  return { addTodo, removeTodo };
+  const toggleCheckedTodo = (id: TodoId) => {
+    dispatch(toggleTodoCompleted(id));
+  };
+
+  const updateTodo = (id: TodoId, title: string) => {
+    dispatch(updateTodoTitle({ id, title }));
+  };
+
+  return {
+    addTodo,
+    removeTodo,
+    toggleCheckedTodo,
+    updateTodo,
+  };
 }
