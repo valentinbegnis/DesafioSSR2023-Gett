@@ -16,20 +16,18 @@ export default function Pagination({
   }
 
   return (
-    <nav>
-      <ul className="flex flex-wrap justify-center gap-y-2">
-        {pageNumbers.map((number) => (
-          <li key={number}>
-            <button
-              type="button"
-              onClick={() => paginate(number)}
-              className={`${number === currentPage ? 'bg-gray-200 font-medium pointer-events-none' : 'bg-white'} w-8 h-8 py-1 px-2 text-sm border hover:bg-gray-100`}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ul className="flex flex-wrap justify-center gap-y-2">
+      {pageNumbers.map((number) => (
+        <li key={number}>
+          <button
+            type="button"
+            onClick={() => paginate(number)}
+            className={`${number === currentPage ? 'bg-gray-200 font-medium pointer-events-none' : 'bg-white'} w-8 h-8 py-1 px-2 text-sm border hover:bg-gray-100`}
+          >
+            {number}
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }

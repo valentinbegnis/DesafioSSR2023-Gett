@@ -1,10 +1,10 @@
 import {
   Button, Card, Subtitle, TextInput,
 } from '@tremor/react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
-import validUsers from '@/usersData/validUsers';
+import { useRouter } from 'next/router';
 import FocusTrap from 'focus-trap-react';
+import validUsers from '@/usersData/validUsers';
 
 export default function LoginForm() {
   const router = useRouter();

@@ -90,13 +90,13 @@ export default function ListOfTodos() {
           </TableHead>
           <TableBody>
             {todos.status === 'loading' && (
-            <TableRow>
-              {[1, 2, 3].map((number) => (
-                <TableCell key={number}>
-                  <Text>Loading...</Text>
-                </TableCell>
-              ))}
-            </TableRow>
+              <TableRow>
+                {[1, 2, 3].map((number) => (
+                  <TableCell key={number}>
+                    <Text>Loading...</Text>
+                  </TableCell>
+                ))}
+              </TableRow>
             )}
             {todos.status === 'succeeded'
             && (

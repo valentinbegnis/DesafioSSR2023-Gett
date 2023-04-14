@@ -18,7 +18,7 @@ export default function useClickOutsideModal({ setOpenModal }: Props) {
     document.addEventListener('mousedown', closeModal);
 
     return () => document.removeEventListener('mousedown', closeModal);
-  }, []);
+  }, []); // eslint-disable-line
 
   return { modalRef };
 }
