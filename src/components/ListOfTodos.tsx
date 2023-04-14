@@ -100,9 +100,11 @@ export default function ListOfTodos() {
             )}
             {todos.status === 'succeeded'
             && (
-              currentTodos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
-              ))
+              currentTodos.length > 0
+                ? currentTodos.map((todo) => (
+                  <TodoItem key={todo.id} todo={todo} />
+                ))
+                : <Text color="slate" className="py-2 font-medium text-lg">You don&apos;t have any todos</Text>
             )}
             {todos.status === 'failed'
             && (
