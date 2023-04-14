@@ -12,7 +12,7 @@ export default function Home() {
           <ListOfTodos />
         </section>
       </main>
-      <footer className="pt-2 px-4 text-gray-400">
+      <footer className="pt-2 px-4 text-center text-gray-400">
         <Text>
           <span className="font-medium text-orange-400">
             Gett

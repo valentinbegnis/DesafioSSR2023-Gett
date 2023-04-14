@@ -1,6 +1,8 @@
 import {
   Badge,
   Card,
+  SelectBox,
+  SelectBoxItem,
   Table,
   TableBody,
   TableCell,
@@ -8,7 +10,6 @@ import {
   TableHeaderCell,
   TableRow,
   Text,
-  Title,
 } from '@tremor/react';
 
 import { useState } from 'react';
@@ -22,7 +23,7 @@ export default function ListOfTodos() {
   const todos = useAppSelector((state) => state.todos);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [todosPerPage, serTodosPerPage] = useState(10);
+  const [todosPerPage, setTodosPerPage] = useState(10);
 
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
@@ -30,11 +31,27 @@ export default function ListOfTodos() {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const handleSelectBox = (value: string) => {
+    const parsedValue = Number(value);
+    setTodosPerPage(parsedValue);
+  };
+
   return (
     <>
       <Card className="p-4">
         <div className="flex justify-between items-center">
-          <Title className="font-bold">List of todos</Title>
+          <div className="w-min">
+            <SelectBox
+              placeholder="Amount of todos to show"
+              onValueChange={(value) => handleSelectBox(value)}
+            >
+              {[...Array(16)]
+                .map((_, index) => index + 5)
+                .map((number) => (
+                  <SelectBoxItem key={number} value={`${number}`} />
+                ))}
+            </SelectBox>
+          </div>
           <Badge color="orange">
             Current page:
             <span className="ml-1 font-bold">
