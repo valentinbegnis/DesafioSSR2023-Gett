@@ -12,37 +12,58 @@ import {
   Text,
 } from '@tremor/react';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/hooks/store';
 import useTodosServices from '@/hooks/useTodosServices';
 import TodoItem from './TodoItem';
 import Pagination from './Pagination';
+import Modal from './Modal';
+import RedirectToLoginModal from './RedirectToLoginModal';
 
 export default function ListOfTodos() {
   useTodosServices();
   const todos = useAppSelector((state) => state.todos);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [todosPerPage, setTodosPerPage] = useState(10);
+  const [todosPerPage, setTodosPerPage] = useState(5);
+  const [openModal, setOpenModal] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<User>();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('loggedInUser');
+
+    if (!storedUser) {
+      setOpenModal(true);
+      return;
+    }
+
+    const parsedUser = JSON.parse(storedUser);
+    setLoggedInUser(parsedUser);
+  }, []);
+
+  const filteredTodos = loggedInUser
+    ? todos.data.filter((todo) => todo.userId === loggedInUser.userId)
+    : [];
 
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-  const currentTodos = todos.data.slice(indexOfFirstTodo, indexOfLastTodo);
+  const currentTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const handleSelectBox = (value: string) => {
     const parsedValue = Number(value);
     setTodosPerPage(parsedValue);
+    setCurrentPage(1);
   };
 
   return (
     <>
       <Card className="p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
           <div className="w-min">
             <SelectBox
-              placeholder="Amount of todos to show"
+              placeholder="Amount of todos"
               onValueChange={(value) => handleSelectBox(value)}
             >
               {[...Array(16)]
@@ -94,10 +115,13 @@ export default function ListOfTodos() {
       </Card>
       <Pagination
         todosPerPage={todosPerPage}
-        totalTodos={todos.data.length}
+        totalTodos={filteredTodos.length}
         currentPage={currentPage}
         paginate={paginate}
       />
+      <Modal>
+        {openModal && <RedirectToLoginModal />}
+      </Modal>
     </>
   );
 }

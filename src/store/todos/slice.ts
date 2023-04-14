@@ -19,7 +19,7 @@ const todosSlice = createSlice({
   reducers: {
     addNewTodo: (state, action: PayloadAction<Todo>) => {
       const id = Math.max(...state.data.map((todo) => todo.id)) + 1;
-      state.data.push({ id, ...action.payload });
+      state.data.unshift({ id, ...action.payload });
     },
     deleteTodoById: (state, action: PayloadAction<TodoId>) => {
       const id = action.payload;

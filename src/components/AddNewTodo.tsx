@@ -18,12 +18,13 @@ export default function AddNewTodo() {
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-4">
-      <label className="font-bold text-gray-500">
+      <label className="font-medium text-gray-400">
         Add a new todo
         <TextInput
           autoFocus
           type="text"
           name="title"
+          required
           placeholder="Study for Math exam..."
           className="h-10 mt-1"
         />

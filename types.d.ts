@@ -15,3 +15,8 @@ interface TodosState {
   status: string;
   error: null | string;
 }
+
+interface User {
+  userId: number
+  username: string
+}

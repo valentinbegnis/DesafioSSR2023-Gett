@@ -7,5 +7,5 @@ export default function useTodosServices() {
 
   useEffect(() => {
     dispatch(getTodosAsync());
-  }, []); // eslint-disable-line
+  }, []);
 }

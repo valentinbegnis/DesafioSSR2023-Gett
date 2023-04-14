@@ -23,7 +23,7 @@ export default function Pagination({
             <button
               type="button"
               onClick={() => paginate(number)}
-              className={`${number === currentPage ? 'bg-gray-200 font-medium pointer-events-none' : 'bg-white'} w-9 h-9 py-1 px-2 border hover:bg-gray-100`}
+              className={`${number === currentPage ? 'bg-gray-200 font-medium pointer-events-none' : 'bg-white'} w-8 h-8 py-1 px-2 text-sm border hover:bg-gray-100`}
             >
               {number}
             </button>
