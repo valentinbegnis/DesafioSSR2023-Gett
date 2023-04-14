@@ -1,6 +1,7 @@
 import {
   Button, Card, TextInput, Title,
 } from '@tremor/react';
+import FocusTrap from 'focus-trap-react';
 import useTodosActions from '@/hooks/useTodosActions';
 import useClickOutsideModal from '@/hooks/useClickOutsideModal';
 
@@ -27,23 +28,25 @@ export default function UpdateTodoModal({ todo, setOpenModal }: Props) {
 
   return (
     <div className="fixed z-10 inset-0 flex bg-black/50">
-      <Card ref={modalRef} className="relative w-80 m-auto p-4 shadow-md">
-        <Title className="mb-4 text-center">Edit Todo title</Title>
-        <form onSubmit={handleSubmit}>
-          <TextInput
-            type="text"
-            name="title"
-            defaultValue={todo.title}
-          />
-          <Button
-            type="submit"
-            color="amber"
-            className="w-full mt-4"
-          >
-            Add
-          </Button>
-        </form>
-      </Card>
+      <FocusTrap>
+        <Card ref={modalRef} className="relative w-80 m-auto p-4 shadow-md">
+          <Title className="mb-4 text-center">Edit Todo title</Title>
+          <form onSubmit={handleSubmit}>
+            <TextInput
+              type="text"
+              name="title"
+              defaultValue={todo.title}
+            />
+            <Button
+              type="submit"
+              color="amber"
+              className="w-full mt-4"
+            >
+              Add
+            </Button>
+          </form>
+        </Card>
+      </FocusTrap>
     </div>
   );
 }

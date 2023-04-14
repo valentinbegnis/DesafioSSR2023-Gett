@@ -9,3 +9,9 @@ interface Todo {
 interface TodoWithId extends Todo {
   id: TodoId
 }
+
+interface TodosState {
+  data: TodoWithId[];
+  status: string;
+  error: null | string;
+}
