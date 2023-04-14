@@ -4,6 +4,7 @@ import {
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import validUsers from '@/usersData/validUsers';
+import FocusTrap from 'focus-trap-react';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -50,35 +51,37 @@ export default function LoginForm() {
       <Subtitle color="slate" className="text-center text-2xl">
         Login
       </Subtitle>
-      <Card className="mt-3">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <label className="text-gray-400 font-medium">
-            Username
-            <TextInput
-              type="text"
-              name="username"
-              placeholder="admin1"
-              required
-              error={userError}
-              errorMessage={userError ? 'Wrong username' : ''}
-            />
-          </label>
-          <label className="text-gray-400 font-medium">
-            Password
-            <TextInput
-              type="password"
-              name="password"
-              placeholder="*********"
-              required
-              error={passwordError}
-              errorMessage={passwordError ? 'Wrong password' : ''}
-            />
-          </label>
-          <Button size="lg" color="amber" loading={isLoading}>
-            Login
-          </Button>
-        </form>
-      </Card>
+      <FocusTrap>
+        <Card className="mt-3">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <label className="text-gray-400 font-medium">
+              Username
+              <TextInput
+                type="text"
+                name="username"
+                placeholder="eg: user1"
+                required
+                error={userError}
+                errorMessage={userError ? 'Wrong username' : ''}
+              />
+            </label>
+            <label className="text-gray-400 font-medium">
+              Password
+              <TextInput
+                type="password"
+                name="password"
+                placeholder="Your secret password"
+                required
+                error={passwordError}
+                errorMessage={passwordError ? 'Wrong password' : ''}
+              />
+            </label>
+            <Button size="lg" color="amber" loading={isLoading}>
+              Login
+            </Button>
+          </form>
+        </Card>
+      </FocusTrap>
     </section>
   );
 }
